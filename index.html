@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="index.js" defer></script>
+    <style type="text/css">
+        @font-face {
+            font-family: "Roadgeek 2014 Series EM";
+            src: /*local("Roadgeek 2014 Series EM"), local("Roadgeek2014SeriesEM")*/,
+                url("fonts/Roadgeek2014SeriesEM.woff2") format("woff2"),
+                url("fonts/Roadgeek2014SeriesEM.woff") format("woff");
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: "Roadgeek 2014 Series E";
+            src: /*local("Roadgeek 2014 Series E"), local("Roadgeek2014SeriesE")*/,
+                url("fonts/Roadgeek2014SeriesE.woff2") format("woff2"),
+                url("fonts/Roadgeek2014SeriesE.woff") format("woff");
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        h1, form {
+            font-family: "Roadgeek 2014 Series E", "Roadgeek 2005 Series E", "Clearview";
+        }
+    </style>
+</head>
+<body>
+
+<h1>Junction City</h1>
+
+<form>
+    <dl>
+        <dt>
+            <label for="exit">Exit number:</label>
+        </dt>
+        <dd>
+            <input id="exit" type="text" placeholder="27B-A">
+        </dd>
+        <dt>
+            <label for="ref">Route numbers (one per line):</label>
+        </dt>
+        <dd>
+            <textarea id="ref" placeholder="US 66" rows="3"></textarea>
+        </dd>
+        <dt>
+            <label for="destination">Destinations (one per line):</label>
+        </dt>
+        <dd>
+            <textarea id="destination" placeholder="Mechanicsville" rows="3"></textarea>
+        </dd>
+    </dl>
+    <button id="simulate" type="button" disabled>Simulate</button>
+</form>
+
+<hr>
+
+<svg id="simulation">
+    <defs>
+        <filter id="signShadow">
+            <feDropShadow dx="0" dy="0" stdDeviation="1" />
+        </filter>
+        <path id="arrowPath" fill="white" fill-rule="nonzero" stroke="none" d="M 26.992265,2.9621872e-5 C 26.906125,6.9062187e-4 26.820114,0.01241962 26.736405,0.03518962 L 9.0488545,3.4648726 c -0.1905417,0.03779 -0.3719028,0.127989 -0.5195327,0.27539 -0.3903821,0.3905 -0.3903821,1.023561 0,1.414061 0.062498,0.06236 0.1302164,0.113919 0.2031237,0.156249 L 15.025434,9.1758006 1.2378603e-6,22.962896 5.0371246,28 18.824273,12.974625 l 3.865244,6.292962 c 0.0425,0.07295 0.0938,0.140765 0.15625,0.203127 0.390392,0.390538 1.023535,0.390538 1.414067,0 0.147482,-0.147402 0.239426,-0.328739 0.275393,-0.519531 L 27.964923,1.2636996 c 0.0911,-0.33486498 0.0046,-0.70787398 -0.257814,-0.97070198 -0.197065,-0.197007 -0.456431,-0.294952 -0.714844,-0.292967998128 z" />
+    </defs>
+</svg>
+
+</body>
+</html>
