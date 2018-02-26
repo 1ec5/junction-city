@@ -12,6 +12,8 @@ function simulate(options) {
 		}
 	});
 	
+	let side = document.getElementById("side").value;
+	
 	let exitTab = document.createElementNS(svgNS, "svg");
 	exitTab.setAttribute("x", 0);
 	exitTab.setAttribute("y", 0);
@@ -39,11 +41,22 @@ function simulate(options) {
 	
 	let exitNumberValue = document.getElementById("exit").value;
 	
+	if (side === "left") {
+		let left = document.createElementNS(svgNS, "tspan");
+		left.textContent = "Left".toUpperCase();
+		left.setAttribute("font-size", "10pt");
+		exitLegend.appendChild(left);
+	}
+	
 	let exit = document.createElementNS(svgNS, "tspan");
 	if (exitNumberValue.includes("-")) {
 		exit.textContent = "Exits".toUpperCase();
 	} else {
 		exit.textContent = "Exit".toUpperCase();
+	}
+	if (side === "left") {
+		exit.setAttribute("x", 11);
+		exit.setAttribute("dy", "1em");
 	}
 	exit.setAttribute("font-size", "10pt");
 	exitLegend.appendChild(exit);
@@ -116,10 +129,17 @@ function simulate(options) {
 	
 	let arrow = document.createElementNS(svgNS, "use");
 	arrow.setAttribute("href", "#arrowPath");
-	arrow.setAttribute("x", "50%");
 	arrow.setAttribute("y", legendsBBox.y + legendsBBox.height + 9);
 	arrow.setAttribute("width", 28);
 	arrow.setAttribute("height", 28);
+	if (side === "left") {
+		let arrowTransform = sign.createSVGTransform();
+		arrowTransform.setScale(-1, 1);
+		arrow.transform.baseVal.appendItem(arrowTransform);
+		arrow.setAttribute("x", "-50%");
+	} else {
+		arrow.setAttribute("x", "50%");
+	}
 	let arrowTransform = sign.createSVGTransform();
 	arrowTransform.setTranslate(-28 / 2, 0);
 	arrow.transform.baseVal.appendItem(arrowTransform);
@@ -134,8 +154,10 @@ function simulate(options) {
 	sign.setAttribute("overflow", "visible");
 	let signBBox = sign.getBBox();
 	
-	exitTab.setAttribute("x", signBBox.x + signBBox.width - exitTabBBox.width);
-	exitTabBBox = exitTab.getBBox();
+	if (side === "right") {
+		exitTab.setAttribute("x", signBBox.x + signBBox.width - exitTabBBox.width);
+		exitTabBBox = exitTab.getBBox();
+	}
 	
 	let shadowPadding = 4;
 	simulation.setAttribute("width", signBBox.width + shadowPadding);
